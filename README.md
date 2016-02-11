@@ -1,3 +1,63 @@
+### Introduction
+
+I customized the `angular2-webpack-starter` project by adding [Bootstrap](http://getbootstrap.com/) and [Less](http://lesscss.org/) support.
+
+Added the following dependencies:
+
+1. npm install less --save
+2. npm install less-loader --save
+3. npm install css-loader --save
+4. npm install bootstrap --save
+5. npm install jquery --save
+
+Added the following configuration to `webpack.config.js`.
+
+```javascript
+{ test: /\.less$/,     loader: 'style!css!less'}
+
+...
+{
+  test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+  loader: "url?limit=10000&minetype=application/font-woff"
+}, {
+  test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+  loader: "url?limit=10000&minetype=application/font-woff"
+}, {
+  test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+  loader: "url?limit=10000&minetype=application/octet-stream"
+}, {
+  test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+  loader: "file"
+}, {
+  test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+  loader: "url?limit=10000&minetype=image/svg+xml"
+}
+```
+
+Add jQuery configuration:
+```javascript
+new webpack.ProvidePlugin({
+  jQuery: 'jquery',
+  $: 'jquery',
+  jquery: 'jquery'
+})
+```
+Added file `src/app/app.less` containing:
+
+```css
+@import "~bootstrap/less/bootstrap.less";
+```
+
+In `app.ts`, I am `requiring`:
+
+```javascript
+var css = require('./app.less');
+var bs = require('bootstrap');
+```
+
+Finally, I customized the template HTML in `app.ts` and made the HTML in `home.html` more Bootstrap friendly.
+
+
 [![taylor swift](https://img.shields.io/badge/secured%20by-taylor%20swift-brightgreen.svg)](https://twitter.com/SwiftOnSecurity)
 [![volkswagen status](https://auchenberg.github.io/volkswagen/volkswargen_ci.svg?v=1)](https://github.com/auchenberg/volkswagen) [![GitHub version](https://badge.fury.io/gh/angularclass%2Fangular2-webpack-starter.svg)](https://badge.fury.io/gh/angularclass%2Fangular2-webpack-starter) [![Dependency Status](https://david-dm.org/angularclass/angular2-webpack-starter.svg)](https://david-dm.org/angularclass/angular2-webpack-starter)
 [![Issue Stats](http://issuestats.com/github/angularclass/angular2-webpack-starter/badge/pr?style=flat)](http://issuestats.com/github/angularclass/angular2-webpack-starter)

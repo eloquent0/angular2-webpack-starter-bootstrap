@@ -61,9 +61,29 @@ module.exports = {
 
       // Support for CSS as raw text
       { test: /\.css$/,   loader: 'raw-loader' },
+      // Support for *.less files.
+      { test: /\.less$/,     loader: 'style!css!less'},
 
       // support for .html as raw text
-      { test: /\.html$/,  loader: 'raw-loader', exclude: [ root('src/index.html') ] }
+      { test: /\.html$/,  loader: 'raw-loader', exclude: [ root('src/index.html') ] },
+
+      // support for fonts
+      {
+        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&minetype=application/font-woff"
+      }, {
+        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&minetype=application/font-woff"
+      }, {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&minetype=application/octet-stream"
+      }, {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "file"
+      }, {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=10000&minetype=image/svg+xml"
+      }
 
       // if you add a loader include the resolve file extension above
     ]
@@ -82,6 +102,11 @@ module.exports = {
         'ENV': JSON.stringify(metadata.ENV),
         'NODE_ENV': JSON.stringify(metadata.ENV)
       }
+    }),
+    new webpack.ProvidePlugin({
+      jQuery: 'jquery',
+      $: 'jquery',
+      jquery: 'jquery'
     })
   ],
 
